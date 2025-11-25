@@ -86,4 +86,34 @@ function renderPagination() {
 
 document.addEventListener("DOMContentLoaded", () => {
     loadPage();
+
+    // Search functionality
+    const searchBtn = document.getElementById("search-btn");
+    const searchInput = document.getElementById("search-input");
+
+    searchBtn.addEventListener("click", () => {
+        const status = document.querySelector("#status-filter").value;
+        const gender = document.querySelector("#gender-filter").value;
+        const species = document.querySelector("#species-filter").value;
+        performSearch(status, gender, species);
+    });
+    searchInput.addEventListener("keypress", (e) => {
+        const status = document.querySelector("#status-filter").value;
+        const gender = document.querySelector("#gender-filter").value;
+        const species = document.querySelector("#species-filter").value;
+        if (e.key === "Enter") {
+            performSearch(status, gender, species);
+        }
+    });
 });
+
+function performSearch(status = "", gender = "", species = "") {
+    const searchInput = document.getElementById("search-input");
+    const query = searchInput.value.trim();
+
+    loadPage(
+        `https://rickandmortyapi.com/api/character/?name=${encodeURIComponent(query)}${status ? "&status=" + status : ""}${
+            gender ? "&gender=" + gender : ""
+        }${species ? "&species=" + species : ""}`
+    );
+}
