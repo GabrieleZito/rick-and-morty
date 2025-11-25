@@ -55,7 +55,7 @@ function showModal(character) {
                 const idStr = parts[parts.length - 1] || parts[parts.length - 2];
                 const idNum = parseInt(idStr, 10);
                 const display = Number.isFinite(idNum) ? String(idNum).padStart(2, "0") : idStr;
-                return `<div class="episode-badge" ">E${display}</div>`;
+                return `<div class="episode-badge">E${display}</div>`;
             } catch (e) {
                 return `<div class="episode-badge"">EP</div>`;
             }
