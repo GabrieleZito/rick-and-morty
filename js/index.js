@@ -1,4 +1,5 @@
 import { apiCall } from "./apiCall.js";
+import { showModal } from "./showModal.js";
 
 let currentData = null;
 
@@ -18,6 +19,8 @@ function renderCards(characters) {
 
     characters.forEach((character) => {
         const card = createCharacterCard(character);
+        // open modal on click
+        card.addEventListener("click", () => showModal(character));
         cardsContainer.appendChild(card);
     });
 }
