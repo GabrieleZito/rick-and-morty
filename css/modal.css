@@ -1,0 +1,88 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal {
+    background: #1e1e1e;
+    border: 1px solid #3e3e42;
+    border-radius: 10px;
+    max-width: 900px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    overflow: hidden;
+}
+
+.modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.modal-meta {
+    color: #858585;
+    margin-bottom: 8px;
+}
+
+.modal-close {
+    position: absolute;
+    right: 24px;
+    top: 18px;
+    background: transparent;
+    border: 0;
+    color: #e0e0e0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.modal-episodes {
+    margin-top: 12px;
+    color: #cfcfcf;
+    font-size: 13px;
+    max-height: 180px;
+    overflow: auto;
+}
+
+.episode-badge {
+    display: inline-block;
+    padding: 6px 8px;
+    margin: 4px 6px 4px 0;
+    background: #3c3c3c;
+    color: #e0e0e0;
+    border: 1px solid #4b4b4b;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.episode-badge:hover {
+    background: #3e3e42;
+    border-color: #007acc;
+    color: #fff;
+}

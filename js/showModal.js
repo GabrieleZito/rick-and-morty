@@ -47,9 +47,19 @@ function showModal(character) {
 
     const episodesList = document.createElement("div");
     episodesList.className = "modal-episodes";
-    // show episode urls (could be replaced with names by additional fetches)
+    // show episodes as numbered badges (extract id from URL)
     episodesList.innerHTML = character.episode
-        .map((ep) => `<div><a href="${ep}" target="_blank" rel="noreferrer">${ep}</a></div>`)
+        .map((ep) => {
+            try {
+                const parts = ep.split("/");
+                const idStr = parts[parts.length - 1] || parts[parts.length - 2];
+                const idNum = parseInt(idStr, 10);
+                const display = Number.isFinite(idNum) ? String(idNum).padStart(2, "0") : idStr;
+                return `<div class="episode-badge" ">E${display}</div>`;
+            } catch (e) {
+                return `<div class="episode-badge"">EP</div>`;
+            }
+        })
         .join("");
 
     content.appendChild(closeBtn);

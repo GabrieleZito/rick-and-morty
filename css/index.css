@@ -1,5 +1,6 @@
 @import "./header.css";
 @import "./card.css";
+@import "./modal.css";
 
 body {
     background-color: #1e1e1e;
