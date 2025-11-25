@@ -92,28 +92,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("search-input");
 
     searchBtn.addEventListener("click", () => {
-        const status = document.querySelector("#status-filter").value;
-        const gender = document.querySelector("#gender-filter").value;
-        const species = document.querySelector("#species-filter").value;
-        performSearch(status, gender, species);
+        performSearch();
     });
     searchInput.addEventListener("keypress", (e) => {
-        const status = document.querySelector("#status-filter").value;
-        const gender = document.querySelector("#gender-filter").value;
-        const species = document.querySelector("#species-filter").value;
         if (e.key === "Enter") {
-            performSearch(status, gender, species);
+            performSearch();
         }
     });
 });
 
-function performSearch(status = "", gender = "", species = "") {
-    const searchInput = document.getElementById("search-input");
-    const query = searchInput.value.trim();
+function performSearch() {
+    const name = document.getElementById("search-input").value.trim();
+    const status = document.querySelector("#status-filter").value;
+    const gender = document.querySelector("#gender-filter").value;
+    const species = document.querySelector("#species-filter").value;
+    // build params only for non-empty values
+    const params = [];
+    if (name) params.push(`name=${encodeURIComponent(name)}`);
+    if (status) params.push(`status=${encodeURIComponent(status)}`);
+    if (gender) params.push(`gender=${encodeURIComponent(gender)}`);
+    if (species) params.push(`species=${encodeURIComponent(species)}`);
 
-    loadPage(
-        `https://rickandmortyapi.com/api/character/?name=${encodeURIComponent(query)}${status ? "&status=" + status : ""}${
-            gender ? "&gender=" + gender : ""
-        }${species ? "&species=" + species : ""}`
-    );
+    if (params.length === 0) {
+        // no filters: load base endpoint
+        loadPage();
+    } else {
+        const query = params.join("&");
+        loadPage(`https://rickandmortyapi.com/api/character/?${query}`);
+    }
 }
